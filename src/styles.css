@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/ng2-slim-loading-bar/style.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
 
 /* Global Styles */
-
+.mat-form-field-underline {
+  background-color: #fff !important;
+}
 * {
   font-family: 'Roboto', Arial, sans-serif;
   box-sizing: border-box;
@@ -109,7 +113,7 @@ label {
 
 /* Top Bar */
 
-app-menu-topo {
+/* app-menu-topo {
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -120,7 +124,7 @@ app-menu-topo {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 app-menu-topo h1 {
   color: whitesmoke;

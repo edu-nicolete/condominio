@@ -1,48 +1,51 @@
 
-<div class="d-flex h-100 align-items-center">
-  <div class="mx-auto text-center">
-    <div class="jumbotron" style="margin-top: 30%;">
-      <h1 class="display-4">Acesso Restrito</h1>
-      <hr class="my-4">
-      <form [formGroup]="logaForm" novalidate>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="far fa-id-badge"></i>
-            </span>
-          </div>
-          <input type="text" class="form-control" formControlName="nomeUsuario" #nomeUsuario placeholder="Usuário" />
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-6" style="margin-top: 10%; margin-left: 25%;">
+      <div class=" card">
+        <div class=" card-header"><h1 class=" title">Acesso Restrito</h1></div>
+        <div class=" card-body">
+          <form [formGroup]="logaForm" novalidate>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1" style="color: #fff;">
+                  <i class="far fa-id-badge"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" formControlName="nomeUsuario" #nomeUsuario placeholder="Usuário" />
+            </div>
+            <div *ngIf="logaForm.controls['nomeUsuario'].invalid && (logaForm.controls['nomeUsuario'].dirty || logaForm.controls['nomeUsuario'].touched)" class="alert alert-danger">
+              <div *ngIf="logaForm.controls['nomeUsuario'].errors.required">
+                Usuário deve ser preenchido.
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1" style="color: #fff;">
+                  <i class="fas fa-key"></i>
+                </span>
+              </div>
+              <input type="password" class="form-control" formControlName="senhaUsuario" #senhaUsuario placeholder="Senha"/>
+            </div>
+            <div *ngIf="logaForm.controls['senhaUsuario'].invalid && (logaForm.controls['senhaUsuario'].dirty || logaForm.controls['senhaUsuario'].touched)" class="alert alert-danger">
+              <div *ngIf="logaForm.controls['senhaUsuario'].errors.required">
+                Senha deve ser preenchida.
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 text-right">
+                <button class="col-12 btn btn-primary" (click)="verificaUsuario(nomeUsuario.value, senhaUsuario.value)"
+                [disabled]="logaForm.pristine || logaForm.invalid">
+                  Entrar
+                </button>
+              </div>
+              <div class="col-6 text-right">
+                <button class="col-12 btn btn-danger" (click)="limparCampos()">Limpar</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div *ngIf="logaForm.controls['nomeUsuario'].invalid && (logaForm.controls['nomeUsuario'].dirty || logaForm.controls['nomeUsuario'].touched)" class="alert alert-danger">
-          <div *ngIf="logaForm.controls['nomeUsuario'].errors.required">
-            Usuário deve ser preenchido.
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="fas fa-key"></i>
-            </span>
-          </div>
-          <input type="password" class="form-control" formControlName="senhaUsuario" #senhaUsuario placeholder="Senha"/>
-        </div>
-        <div *ngIf="logaForm.controls['senhaUsuario'].invalid && (logaForm.controls['senhaUsuario'].dirty || logaForm.controls['senhaUsuario'].touched)" class="alert alert-danger">
-          <div *ngIf="logaForm.controls['senhaUsuario'].errors.required">
-            Senha deve ser preenchida.
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 text-right">
-            <button class="col-12 btn btn-primary" (click)="loga(nomeUsuario.value, senhaUsuario.value)"
-            [disabled]="logaForm.pristine || logaForm.invalid">
-              Entrar
-            </button>
-          </div>
-          <div class="col-6 text-right" (click)="limpaCampos()">
-            <button class="col-12 btn btn-danger">Limpar</button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

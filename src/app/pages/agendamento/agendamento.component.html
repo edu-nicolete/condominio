@@ -1,0 +1,104 @@
+
+<div class=" content">
+  <div class=" row">
+    <div class=" col-12">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <div class=" row">
+            <div class=" col-sm-12 text-center">
+              <h2 class=" card-title">Agendamentos</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <h4 class="card-shared">Realize agendamentos de mudanças, reservas de churrasqueiras, salão de festas e todo o conforto que seu condomínio possua.</h4>
+            </div>
+          </div>
+        </div>
+        <div class=" card-body">
+          <form [formGroup]="agendamentoForm" novalidate>
+            <div *ngIf="message" class="alert {{typeAlert}}">
+              {{messageText}}
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Tipo de Agendamento</label>
+                  <select class="form-control select" (ngModelChange)="verificaLocal($event)" id="tipoAgendamento" formControlName="tipoAgendamento" #tipoAgendamento>
+                    <option selected value=''>Selecione...</option>
+                    <option *ngFor="let title of listaTipoAgendamento" [value]="title.idTipoAgendamento">
+                      {{title.nomeTipoAgendamento}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Local</label>
+                  <select class="form-control select" (ngModelChange)="buscaDatasIndisponiveis($event)" id="escolhaLocal" formControlName="escolhaLocal" #escolhaLocal>
+                    <option selected value=''>Selecione...</option>
+                    <option *ngFor="let title of listaLocalAgendamento" [value]="title.idLocalAgendamento">
+                      {{title.nomeLocalAgendamento}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="mostraCalendario">
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Data</label>
+                    <full-calendar
+                      #calendar
+                      defaultView="dayGridMonth"
+                      [header]="{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: ''
+                      }"
+                      [plugins]="calendarPlugins"
+                      [events]="calendarEvents"
+                      [locale]="locale"
+                      [longPressDelay]="10"
+                      (dateClick)="selecionaData($event)"
+                    ></full-calendar>
+                  <!-- <br>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="dp3" disabled class="teste" formControlName="dataAgendamento" #dataAgendamento>
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field> -->
+                </div>
+              </div>
+              <div class="col-sm-4 text-right" style="margin-top: 10%;">
+                <button class="col-12 btn btn-warning" (click)="buscaDatasIndisponiveis(agendamentoForm.value.escolhaLocal)">
+                  Limpar data
+                </button>
+              </div>
+            </div>
+            <div class="row" *ngIf="mostraCalendario">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Turno &nbsp;</label><i class="tim-icons icon-alert-circle-exc" title="Selecione um turno que pretende iniciar o agendamento"></i>
+                  <select class="form-control select" id="escolhaTurno" formControlName="escolhaTurno" #escolhaTurno>
+                    <option value='' selected>Selecione...</option>
+                    <option value="Matutino">Matutino</option>
+                    <option value="Vespertino">Vespertino</option>
+                    <option value="Noturno">Noturno</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5%;">
+              <div class="col-12 text-right">
+                <button class="col-12 btn btn-primary" (click)="salvarAgendamento(agendamentoForm.value)">
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
